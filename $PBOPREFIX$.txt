@@ -1,0 +1,7 @@
+///'uo_debugconsole.pbo' from Mikero's dos tools, dll version 5.66///
+prefix=z\uo\addons\debugConsole
+Mikero=DePbo.dll
+version=770538ef
+Pbo Type is: Arma Addon
+Sha: '3FB4639D3053914180EB8B3D0F7057E082678D5D'
+//////</HEADER>//////
