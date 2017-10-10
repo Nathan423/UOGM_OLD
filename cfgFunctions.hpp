@@ -14,6 +14,7 @@ class cfgFunctions {
             class handleAdminControls{};
             class handleZeus{};
             class GMHeal{};
+            class HandleDebugConsole{};
         };
     };
 };
