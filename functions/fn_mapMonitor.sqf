@@ -7,7 +7,7 @@
  *
  * @Return:
  **/
-#include "\z\a3gm\addons\main\script_component.hpp"
+#include "\x\cba\addons\main\script_component.hpp"
 
 #define DEFAULT_PARAM(idx,dft)  (if ((count _this) > idx) then {_this select idx} else {dft})
 #define MARKER_ALPHA 0.75 // Default Marker Alpha
@@ -32,7 +32,7 @@ if ((isNil "uo_mapMonitor_fnc_init") || {!uo_mapMonitor_fnc_init}) then {
 			case WEST: {"ColorBlue"};
 			case EAST: {"ColorRed"};
 			case RESISTANCE: {"ColorGreen"};
-			default {"ColorOrange"};
+			default {"ColorUNKNOWN"};
 		};
 	};
 	uo_mapMonitor_fnc_drawBulletMarker = {

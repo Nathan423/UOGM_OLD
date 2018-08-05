@@ -1,16 +1,18 @@
 disableSerialization;
 params ["_unit", "_display"];
-itemList = [
+UO_itemList = [
     ["ACRE_PRC343", "AN/PRC-343"],
     ["ACRE_PRC148", "AN/PRC-148"],
+    ["ACRE_PRC152", "AN/PRC-152"],
     ["ACRE_PRC117F", "AN/PRC-117F"],
     ["ItemMap", "Map"],
     ["ItemCompass", "Compass"],
     ["ItemWatch", "Watch"],
     ["NVGoggles", "N.V. Goggles"],
-    ["ACE_Earplugs", "Earplugs"]
+    ["ACE_Earplugs", "Earplugs"],
+    ["ACE_RangeCard", "Range Card (Optics)"]
 ];
-publicVariable "itemList";
+publicVariable "UO_itemList";
 
 _sp_blacklistControls = [
     1600,
@@ -20,15 +22,10 @@ _sp_blacklistControls = [
     1607,
     1608,
     1610,
-    1402,
-    2801
+    1402
 ];
 
-_mp_blacklistControls = [
-    2801
-];
-
-//systemChat str _display;
+_mp_blacklistControls = [];
 
 {
     _idc = 2800 + _forEachIndex;
@@ -54,7 +51,7 @@ lbClear (_display displayCtrl 2101);
 {
     _index = (_display displayCtrl 2101) lbAdd (_x select 1);
     (_display displayCtrl 2101) lbSetData [_index, _x select 0];
-} forEach itemList;
+} forEach UO_itemList;
 (_display displayCtrl 2101) lbSetCurSel 0;
 
 if (!isMultiplayer) exitWith {

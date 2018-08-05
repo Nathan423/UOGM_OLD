@@ -18,22 +18,20 @@ switch _ctrlNumber do {
         //systemChat str _array;
     };
     case 2801: {
-        //systemChat "Zeus";
         _array = _unit getVariable "uogm_cbStates";
         _array set [1, _newState];
         _unit setVariable ["uogm_cbStates", _array];
-        //systemChat str _array;
-        hintSilent "This is going to take more shit to fix...";
-        /*switch (_newState) do {
+
+        switch (_newState) do {
             case 1:{
-              [_unit, uo_curator] remoteExec ["assignCurator", 2, false];
+              [_unit, true] remoteExec ["uo_fnc_handleZeus", 2, false];
               hint "You have zeus access";
             };
             case 0: {
-              uo_curator remoteExec ["unassignCurator", 2, false];
+              [_unit, false] remoteExec ["uo_fnc_handleZeus", 2, false];
               hint "You are no longer zeus";
             };
-        };*/
+        };
     };
     case 2802: {
         //systemChat "Invisible";

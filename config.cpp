@@ -13,22 +13,23 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		requiredVersion = 1.62;
-		requiredAddons[] = {"A3_UI_F","uo_main"};
+		requiredVersion = 1.70;
+		requiredAddons[] = {"A3_UI_F","CBA_diagnostic","uo_main"};
 	};
 };
+
 class Extended_PreInit_EventHandlers
 {
 	class uo_debugConsole
 	{
-		init = "call compile preprocessFileLineNumbers '\z\uo\Addons\debugconsole\XEH_preInit.sqf'";
+		init = "call compile preprocessFileLineNumbers '\z\uo\addons\debugConsole\XEH_preInit.sqf'";
 	};
 };
 class Extended_PostInit_EventHandlers
 {
 	class uo_debugConsole
 	{
-		init = "call compile preprocessFileLineNumbers '\z\uo\Addons\debugconsole\xeh_postInit.sqf'";
+		init = "call compile preprocessFileLineNumbers '\z\uo\addons\debugConsole\XEH_postInit.sqf'";
 	};
 };
 class Extended_Init_EventHandlers
@@ -37,22 +38,23 @@ class Extended_Init_EventHandlers
 	{
 		class uo_debugConsole
 		{
-			init = "call compile preprocessFileLineNumbers '\z\uo\Addons\debugconsole\xeh_init.sqf'";
+			init = "call compile preprocessFileLineNumbers '\z\uo\addons\debugConsole\XEH_init.sqf'";
 		};
 	};
 };
-class cfgFunctions
+
+class CfgFunctions
 {
 	class uo
 	{
 		class GUI
 		{
-			file = "\z\uo\addons\debugconsole\functions";
+			file = "\z\uo\addons\debugConsole\functions";
 			class init{};
 			class handleCheckbox{};
 			class mapMonitor{};
 			class handleMapClick{};
-			class acrefix{};
+			class unflipVehicle{};
 			class handleSpectator{};
 			class spawnItem{};
 			class TPUnit{};
@@ -60,9 +62,28 @@ class cfgFunctions
 			class handleAdminControls{};
 			class handleZeus{};
 			class GMHeal{};
+			class hasGMAccess{};
+			class endMission{};
+		};
+	};
+	class A3 {
+		class Debug {
+			class isDebugConsoleAllowed {
+				file = "\z\uo\addons\debugConsole\fn_isDebugConsoleAllowed.sqf";
+			};
 		};
 	};
 };
+
+class CfgDebriefing {
+	class UO_GMEND {
+		subtitle = "The mission was ended by a GM";
+		pictureBackground = "";
+		picture = "mil_objective";
+		pictureColor[] = {0.7,0.6,0.0,1};
+	};
+};
+
 class RscText;
 class RscFrame;
 class RscCombo;
@@ -267,15 +288,15 @@ class UOGM
 			h = "0.028 * safezoneH";
 			tooltip = "The radius around the GM where players will NOT be moved";
 		};
-		class uogm_fixACREMes: RscButton
+		class uogm_unflipVehicle: RscButton
 		{
 			idc = 1611;
-			text = "Hide ACRE Msg";
+			text = "Unflip Vehicle";
 			x = "0.434375 * safezoneW + safezoneX";
 			y = "0.626 * safezoneH + safezoneY";
 			w = "0.0984375 * safezoneW";
 			h = "0.028 * safezoneH";
-			onButtonClick = "[] spawn uo_fnc_acrefix; false;";
+			onButtonClick = "[cursorObject] spawn uo_fnc_unflipVehicle; false;";
 		};
 		class uogm_Spectator: RscButton
 		{
@@ -296,6 +317,16 @@ class UOGM
 			w = "0.0984375 * safezoneW";
 			h = "0.028 * safezoneH";
 			onButtonClick = "['keyDown', [findDisplay 49,59], ''] execVM 'a3\ui_f\scripts\GUI\RscDisplayInterrupt.sqf'; false;";
+		};
+		class uogm_EndMission: RscButton
+		{
+			idc = 1613;
+			text = "End Mission";
+			x = "0.434375 * safezoneW + safezoneX";
+			y = "0.752 * safezoneH + safezoneY";
+			w = "0.0984375 * safezoneW";
+			h = "0.028 * safezoneH";
+			onButtonClick = "call uo_fnc_endMission; false;";
 		};
 		class uogm_MapMonitorCB: RscCheckbox
 		{
